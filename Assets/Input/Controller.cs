@@ -16,11 +16,13 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         _controls.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDisable()
     {
         _controls.Disable();
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
@@ -41,7 +43,7 @@ public class Controller : MonoBehaviour
 
     private void Look()
     {
-        var mDelta = Mouse.current.delta.ReadValue();
-        _object.Look(mDelta);
+        var mPos = _controls.Movement.Look.ReadValue<Vector2>();
+        _object.Look(mPos);
     }
 }

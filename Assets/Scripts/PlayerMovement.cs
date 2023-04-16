@@ -20,12 +20,16 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     public void Look(Vector2 mPos)
     {
-        Debug.Log(mPos);
-        var delta = Vector3.left *mPos.x; 
-        delta += Vector3.up * mPos.y;
-        delta *= Time.deltaTime * _playerData.rotationSpeed;
-        transform.Rotate(delta);
+        var delta = _camera.ScreenToViewportPoint(mPos);
+        delta.x -= 0.5f;
+        delta.y -= 0.5f;
 
+        var t = transform;
+        var angles = t.eulerAngles;
+        var rotation = t.rotation;
+        angles = new Vector3(angles.x - delta.y, angles.y + delta.x, 0);
+
+        transform.eulerAngles = angles;
     }
 
     public void Forward(float moving)
