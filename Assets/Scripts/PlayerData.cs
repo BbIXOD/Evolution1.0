@@ -1,16 +1,9 @@
-using UnityEngine;
 
 public class PlayerData
 {
-    public float rotationTime = 6f;
+    public float rotationSpeed = 1f;
     public float speed = 100f;
-    public float acceleration = 1;
+    public float acceleration = 5;
     private static PlayerData _self;
 
-    public static PlayerData Get()
-    {
-        _self ??= new PlayerData();
-        return _self;
-    }
-    
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,13 +10,12 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         _controls = new Controls();
-        
+        _object = GetComponent<IControllable>();
     }
 
     private void OnEnable()
     {
         _controls.Enable();
-        _controls.Movement.Forward.performed += Forward;
     }
 
     private void OnDisable()
@@ -26,14 +23,25 @@ public class Controller : MonoBehaviour
         _controls.Disable();
     }
 
-    private void Forward(InputAction.CallbackContext callbackContext)
+    private void Update()
     {
-        _object.Forward();
+        Look();
     }
 
-    private void Look(InputAction.CallbackContext callbackContext)
+    private void FixedUpdate()
     {
-        var mPos = _controls.Movement.Look.ReadValue<Vector2>();
-        _object.Look(mPos);
+        Forward();
+    }
+
+    private void Forward()
+    {
+        var moving = _controls.Movement.Forward.ReadValue<float>();
+        _object.Forward(moving);
+    }
+
+    private void Look()
+    {
+        var mDelta = Mouse.current.delta.ReadValue();
+        _object.Look(mDelta);
     }
 }

@@ -29,12 +29,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Forward"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""38ec8ee1-5d07-4734-9793-2f3985655e97"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Integer"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Look"",
@@ -64,7 +64,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC basic"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

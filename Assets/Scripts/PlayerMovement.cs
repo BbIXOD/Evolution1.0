@@ -3,38 +3,34 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IControllable
 {
-    private CharacterController _characterController;
-    [SerializeField] private PlayerData _playerData;
+    private Rigidbody _rigidbody;
+    private PlayerData _playerData;
+    [SerializeField] private Camera _camera;
+    
     
     private float _speed;
-    private bool _swimming;
-
+    private Vector3 _rotationDelta;
+    
     private void Awake()
     {
-        _characterController = GetComponent<CharacterController>();
-        _playerData = PlayerData.Get();
+        _rigidbody = GetComponent<Rigidbody>();
+        _playerData = new PlayerData();
+        _camera = Camera.main;
     }
 
-    private void FixedUpdate()
+    public void Look(Vector2 mPos)
     {
-        Move();
-        _swimming = false;
+        Debug.Log(mPos);
+        var delta = Vector3.left *mPos.x; 
+        delta += Vector3.up * mPos.y;
+        delta *= Time.deltaTime * _playerData.rotationSpeed;
+        transform.Rotate(delta);
+
     }
 
-    public void Forward()
+    public void Forward(float moving)
     {
-        _swimming = true;
-    }
-    
-    public void Look(Vector2 mousePos)
-    {
-        var lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.LookAt(lookPos);
-    }
-
-    private void Move()
-    {
-        _speed = Mathf.Lerp(_speed, _swimming ? _playerData.speed : 0, _playerData.acceleration);
-        _characterController.Move(_speed * Time.fixedDeltaTime * Vector3.forward);
+        _speed = Mathf.Lerp(_speed, moving * _playerData.speed, _playerData.acceleration);
+        _rigidbody.velocity = (_speed * Time.fixedDeltaTime * transform.TransformDirection(Vector3.forward));
     }
 }
