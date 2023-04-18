@@ -1,18 +1,17 @@
-
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IControllable
 {
     private Rigidbody _rigidbody;
     private PlayerMovementData _playerMovementData;
-    [SerializeField] private Camera _camera;
+    private Camera _camera;
 
 
-    private float _speed;
+    public float speed;
     private Vector3 _rotationDelta;
 
-    private const float minRotY = 90;
-    private const float maxRotY = 270;
+    private const float MinRotY = 90;
+    private const float MaxRotY = 270;
     
     private void Awake()
     {
@@ -33,15 +32,15 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
         var t = transform;
         var angles = t.eulerAngles;
-        angles = new Vector3(CheckSector((angles.x - delta.y), minRotY, maxRotY), angles.y + delta.x, 0);
+        angles = new Vector3(CheckSector((angles.x - delta.y), MinRotY, MaxRotY), angles.y + delta.x, 0);
 
         t.eulerAngles = angles;
     }
 
     public void Forward(float moving)
     {
-        _speed = Mathf.Lerp(_speed, moving * _playerMovementData.speed, _playerMovementData.acceleration);
-        _rigidbody.velocity = (_speed * Time.fixedDeltaTime * transform.TransformDirection(Vector3.forward));
+        speed = Mathf.Lerp(speed, moving * _playerMovementData.speed, _playerMovementData.acceleration);
+        _rigidbody.velocity = (speed * Time.fixedDeltaTime * transform.TransformDirection(Vector3.forward));
     }
 
     private void CheckMin(ref float value)
