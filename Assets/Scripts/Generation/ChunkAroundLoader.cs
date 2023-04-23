@@ -9,6 +9,7 @@ public class ChunkAroundLoader : MonoBehaviour
     private readonly int[] _curChunk = new int[2];
 
     [SerializeField] private GameObject foodController;
+    [SerializeField] private Material terrainMaterial;
 
     private void Awake()
     {
@@ -57,6 +58,8 @@ public class ChunkAroundLoader : MonoBehaviour
         }
         
         _curChunk.CopyTo(_position, 0);
+        
+        Debug.Log(ChunkManager.Loaded.Count);
     }
 
     private void VisitChunk(int x, int y)
@@ -66,7 +69,7 @@ public class ChunkAroundLoader : MonoBehaviour
             ChunkManager.Loaded[(x, y)].AddPlayer();
             return;
         }
-        Chunk.MakeChunk(x, y, foodController);
+        Chunk.MakeChunk(x, y, foodController, terrainMaterial);
     }
 
     private void LeaveChunk(int x, int y)

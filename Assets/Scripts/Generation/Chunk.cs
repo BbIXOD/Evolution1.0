@@ -1,4 +1,3 @@
-using Photon.Pun;
 using UnityEngine;
 
 public class Chunk
@@ -12,23 +11,26 @@ public class Chunk
     private readonly TerrainData _terrainData;
     private (int, int) _key;
 
-    public static void MakeChunk(int x, int z, GameObject foodController)
+    public static void MakeChunk(int x, int z, GameObject foodController, Material texture)
     {
         var key = (x, z);
-        var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z);
+        var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z, texture);
         
         ChunkManager.Loaded.Add(key, chunk);
         chunk._key = key;
 
-        chunk._foodController = PhotonNetwork.Instantiate(foodController.name,
+        chunk._foodController = Object.Instantiate(foodController,
             chunk._field.transform.position, Quaternion.Euler(0,0,0));
+        chunk._foodController.isStatic = true;
     }
 
-    private Chunk(float x, float z)
+    private Chunk(float x, float z, Material material)
     {
         _playersCount = 1;
         _field = Generate(x, z);
         _terrain = _field.GetComponent<Terrain>();
+        _terrain.materialTemplate = material;
+
         _terrainData = _terrain.terrainData;
 
         var pos = _field.transform.position;
@@ -72,7 +74,7 @@ public class Chunk
 
 
         var terrain = Terrain.CreateTerrainGameObject(terData);
-        
+
         terrain.transform.position = pos;
 
         return terrain;

@@ -7,7 +7,7 @@ public static class ChunkManager
 
     private readonly static int[] SizeBase = {  32, 10 };
     public readonly static Vector3 Size = new Vector3(SizeBase[0], SizeBase[1], SizeBase[0]);
-    
+
     public const int FoodCount = 50;
 
 }

@@ -2,6 +2,7 @@ using System;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
@@ -9,6 +10,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField
         nickname,
         id;
+    [SerializeField] private Image loadingScreen;
         
     
     private void Awake()
@@ -31,13 +33,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Game");
     }
 
-    public void CreateRoom()
+    public override void OnConnectedToMaster()
     {
-        PhotonNetwork.CreateRoom(id.text);
+        Destroy(loadingScreen);
     }
+    
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(id.text);
+        PhotonNetwork.JoinOrCreateRoom(id.text, null, null);
     }
 }

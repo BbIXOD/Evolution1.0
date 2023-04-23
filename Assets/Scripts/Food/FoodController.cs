@@ -85,8 +85,7 @@ public class FoodController : MonoBehaviour
         
         var food = ChooseFood();
 
-        var instantiated = PhotonNetwork.Instantiate(food.name, place, rot);
-        instantiated.transform.parent = transform;
+        Instantiate(food, place, rot, transform);
 
         _foodCount++;
     }
