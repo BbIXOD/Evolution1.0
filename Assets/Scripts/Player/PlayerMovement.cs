@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IControllable
@@ -7,7 +8,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private Camera _camera;
 
 
-    public float speed;
+    [NonSerialized]public float speed;
     private Vector3 _rotationDelta;
 
     private const float MinRotY = 90;
@@ -18,6 +19,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
         _rigidbody = GetComponent<Rigidbody>();
         _playerMovementData = new PlayerMovementData();
         _camera = Camera.main;
+
+        _rigidbody.angularDrag = Mathf.Infinity;
     }
 
     public void Look(Vector2 mPos)
@@ -35,6 +38,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
         angles = new Vector3(CheckSector((angles.x - delta.y), MinRotY, MaxRotY), angles.y + delta.x, 0);
 
         t.eulerAngles = angles;
+        
     }
 
     public void Forward(float moving)

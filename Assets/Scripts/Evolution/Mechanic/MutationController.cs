@@ -10,10 +10,6 @@ public class MutationController : MonoBehaviour
     private Transform _parent;
     private PlayerStateGetter _stateGetter;
 
-    private int _evoPoints;
-    private int _evoPointsMax;
-    private const int LvlIncrement = 2;
-
     private void Awake()
     {
         var go = gameObject;
@@ -43,19 +39,6 @@ public class MutationController : MonoBehaviour
         }
     }
 
-    public void AddEvoPoints(int increment)
-    {
-       _evoPoints += increment;
-
-       if (_evoPoints < _evoPointsMax)
-       {
-           return;
-       }
-       
-       LvlUp();
-       Mutation();
-    }
-
     public void UpdateNeed()
     {
         foreach (var part in _parts)
@@ -64,13 +47,7 @@ public class MutationController : MonoBehaviour
         }
     }
 
-    private void LvlUp()
-    {
-        _evoPoints -= _evoPointsMax;
-        _evoPointsMax *= LvlIncrement;
-    }
-
-    private void Mutation()
+    public void Mutation()
     {
         FindBestPart(out IBodyPart bestPart);
         
