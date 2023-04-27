@@ -3,13 +3,17 @@ using UnityEngine;
 
 public interface IBodyPart
 {
-    public IEnumerable<IBodyPart> Add { get; }
-    public IEnumerable<IBodyPart> Remove { get; }
-    public IEnumerable<IBodyPart> Destroy { get; }
-    public GameObject Part { get; }
+    public IEnumerable<PartsEnum> Add { get; }
+    public IEnumerable<PartsEnum> Remove { get; }
+    public IEnumerable<PartsEnum> Destroy { get; }
+    public string Part { get; }
     public PlayerStateGetter Getter { set; }
 
-    public float NeedValue { get; }
+    public float NeedValue { get; set; }
+    public PartsEnum Index { get; }
+    public bool Updating { get; set; }
+    public bool Active { get; set; }
 
     public void UpdateValue();
+    public void ClearValue();
 }

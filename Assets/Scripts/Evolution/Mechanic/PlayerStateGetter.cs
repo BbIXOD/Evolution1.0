@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerStateGetter
 {
 
-    private PlayerMovement _movement;
+    private readonly PlayerMovement _movement;
 
     public PlayerStateGetter(GameObject player)
     {

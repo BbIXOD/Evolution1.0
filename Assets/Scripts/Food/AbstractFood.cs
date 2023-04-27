@@ -6,7 +6,7 @@ public class AbstractFood : MonoBehaviour
     private readonly int _evoInc = 10;
     private readonly int _healthInc = 10;
     private const int MoveTime = 200;
-    private const float ForceMultiplier = 2;
+    private const float Speed = 2;
 
     private bool _consumed;
     private Transform _player;
@@ -15,9 +15,8 @@ public class AbstractFood : MonoBehaviour
     {
         if (_consumed)
         {
-            Transform tr;
-            (tr = transform).LookAt(_player);
-            transform.Translate(Time.fixedDeltaTime * ForceMultiplier * tr.forward);
+            var direction = _player.position - transform.position;
+            transform.Translate(Time.fixedDeltaTime * Speed * direction);
         }
     }
 

@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +9,6 @@ public class FoodController : MonoBehaviour
     private int _desired;
     private const int Delta = 10;
     private const int FoodDelay = 5000;
-    private const float MaxHeightMult = 1.5f;
 
     private bool _generatorRunning;
 
@@ -77,9 +75,8 @@ public class FoodController : MonoBehaviour
         place.z = Random.Range(locZ, locZ + ChunkManager.Size.z);
         
         var minY = ChunkManager.Loaded[key].GetChunkHeight(place);
-        var maxY = ChunkManager.Size.y * MaxHeightMult;
-        
-        place.y = Random.Range(minY, maxY);
+
+        place.y = Random.Range(minY, ChunkManager.MaxHeight);
         
         var rot = Quaternion.Euler(0, 0, 0);
         

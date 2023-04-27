@@ -58,8 +58,6 @@ public class ChunkAroundLoader : MonoBehaviour
         }
         
         _curChunk.CopyTo(_position, 0);
-        
-        Debug.Log(ChunkManager.Loaded.Count);
     }
 
     private void VisitChunk(int x, int y)
