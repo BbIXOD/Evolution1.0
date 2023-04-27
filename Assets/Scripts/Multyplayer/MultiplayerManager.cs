@@ -15,12 +15,15 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         _startPosition.z += Random.Range(-Delta, Delta);
 
         player = PhotonNetwork.Instantiate(player.name, _startPosition, Quaternion.Euler(0, 0, 0));
-        var camera = player.GetComponentInChildren<CinemachineVirtualCamera>();
-        camera.Priority++;
+        var cam = player.GetComponentInChildren<CinemachineVirtualCamera>();
+        cam.Priority++;
     }
 
     public void LeaveRoom()
     {
+        Debug.LogWarning("LeaveRoom");
         PhotonNetwork.Destroy(player);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel("LobbyScene");
     }
 }

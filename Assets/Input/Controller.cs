@@ -1,29 +1,36 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
     private Controls _controls;
     private IControllable _object;
     private PhotonView _view;
+    private MenuController _menuController;
 
     private void Awake()
     {
         _controls = new Controls();
+        _menuController = new MenuController();
         _object = GetComponent<IControllable>();
         _view  = GetComponent<PhotonView>();
     }
 
     private void OnEnable()
     {
+        _controls.System.Menu.performed += ShowMenu;
         _controls.Enable();
-        //Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
     }
 
     private void OnDisable()
     {
+        _controls.System.Menu.performed -= ShowMenu;
         _controls.Disable();
-        //Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
     }
 
     private void Update()
@@ -54,5 +61,14 @@ public class Controller : MonoBehaviour
     {
         var mPos = _controls.Movement.Look.ReadValue<Vector2>();
         _object.Look(mPos);
+    }
+
+    private void ShowMenu(InputAction.CallbackContext context)
+    {
+        if (!_view.IsMine)
+        {
+            return;
+        }
+        _menuController.ToggleMenuVisibility();
     }
 }

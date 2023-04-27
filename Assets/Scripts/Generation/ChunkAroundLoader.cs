@@ -60,6 +60,17 @@ public class ChunkAroundLoader : MonoBehaviour
         _curChunk.CopyTo(_position, 0);
     }
 
+    private void OnDestroy()
+    {
+        for (var i = -ChunksAround; i <= ChunksAround; i++)
+        {
+            for (var j = -ChunksAround; j <= ChunksAround; j++)
+            {
+                LeaveChunk(i, j);
+            }
+        }
+    }
+
     private void VisitChunk(int x, int y)
     {
         if (ChunkManager.Loaded.ContainsKey((x, y)))
