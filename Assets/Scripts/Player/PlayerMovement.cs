@@ -35,9 +35,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
         var t = transform;
         var angles = t.eulerAngles;
-        angles = new Vector3(CheckSector((angles.x - delta.y), MinRotY, MaxRotY), angles.y + delta.x, 0);
+        var newAngles = new Vector3(CheckSector((angles.x - delta.y), MinRotY, MaxRotY), angles.y + delta.x, 0);
 
-        t.eulerAngles = angles;
+        t.eulerAngles = Vector3.Lerp(angles, newAngles, _playerMovementData.rotationSpeed);
         
     }
 
