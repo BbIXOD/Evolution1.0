@@ -6,18 +6,20 @@ public class AbstractFood : MonoBehaviour
     private readonly int _evoInc = 10;
     private readonly int _healthInc = 10;
     private const int MoveTime = 200;
-    private const float Speed = 2;
+    private const float Speed = 6;
 
     private bool _consumed;
     private Transform _player;
 
     private void FixedUpdate()
     {
-        if (_consumed)
+        if (!_consumed)
         {
-            var direction = _player.position - transform.position;
-            transform.Translate(Time.fixedDeltaTime * Speed * direction);
+            return;
         }
+        var direction = _player.position - transform.position;
+        direction = direction.normalized;
+        transform.Translate(Time.fixedDeltaTime * Speed * direction);
     }
 
 
