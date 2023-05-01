@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
-    private Vector3 _startPosition = new Vector3(15, 16, 15);
+    private Vector3 _startPosition = new Vector3(15, ChunkManager.MaxHeight, 15);
     private const float Delta = 5;
     
     private void Awake()

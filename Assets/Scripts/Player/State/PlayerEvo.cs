@@ -16,11 +16,13 @@ public class PlayerEvo
     
     private int SetEvoPoints(int points)
     {
-        if (points >= _evoPointsMax)
+        if (points < _evoPointsMax)
         {
-            points = LvlUp(points);
-            _controller.Mutation();
+            return points;
         }
+        
+        points = LvlUp(points);
+        _controller.Mutation();
 
         return points;
     }

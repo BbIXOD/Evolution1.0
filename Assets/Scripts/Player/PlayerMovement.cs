@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private Rigidbody _rigidbody;
     private PlayerMovementData _playerMovementData;
 
+    [NonSerialized]public AttackManager attackManager;
 
     [NonSerialized]public float speed;
     private Vector3 _targetRotation;
@@ -15,12 +16,15 @@ public class PlayerMovement : MonoBehaviour, IControllable
     
     private void Awake()
     {
+        var trans = transform;
+        
         _rigidbody = GetComponent<Rigidbody>();
         _playerMovementData = new PlayerMovementData();
+        attackManager = new AttackManager();
 
         _rigidbody.angularDrag = Mathf.Infinity;
 
-        _targetRotation = transform.eulerAngles;
+        _targetRotation = trans.eulerAngles;
     }
 
     public void Look(Vector2 mPos)
@@ -39,6 +43,11 @@ public class PlayerMovement : MonoBehaviour, IControllable
     {
         speed = Mathf.Lerp(speed, moving * _playerMovementData.speed, _playerMovementData.acceleration);
         _rigidbody.velocity = (speed * Time.fixedDeltaTime * transform.TransformDirection(Vector3.forward));
+    }
+
+    public void Attack()
+    {
+        attackManager.Attack();
     }
 
     private float CheckSector( float value, float fromZero, float fromFull)

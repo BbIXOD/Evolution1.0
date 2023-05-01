@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class Chunk
@@ -11,17 +12,32 @@ public class Chunk
     private readonly TerrainData _terrainData;
     private (int, int) _key;
 
+    private static string _waterLevel = "Water";
+
     public static void MakeChunk(int x, int z, GameObject foodController, Material texture)
     {
         var key = (x, z);
         var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z, texture);
+
+        var position = chunk._field.transform.position;
         
         ChunkManager.Loaded.Add(key, chunk);
         chunk._key = key;
-
+        
         chunk._foodController = Object.Instantiate(foodController,
-            chunk._field.transform.position, Quaternion.Euler(0,0,0));
+            position, Quaternion.Euler(0,0,0));
         chunk._foodController.isStatic = true;
+        chunk._foodController.transform.parent = chunk._field.transform;
+
+        position.y = ChunkManager.MaxHeight;
+        var bound = (GameObject)Resources.Load(_waterLevel);
+
+        var localScale = ChunkManager.Size;
+        localScale.y = 0.001f;
+        bound.transform.localScale = localScale;
+        bound.transform.position = position;
+
+        Object.Instantiate(bound).transform.parent = chunk._field.transform;
     }
 
     private Chunk(float x, float z, Material material)
@@ -53,7 +69,6 @@ public class Chunk
         }
         
         Object.Destroy(_field);
-        Object.Destroy(_foodController);
         ChunkManager.Loaded.Remove(_key);
     }
 

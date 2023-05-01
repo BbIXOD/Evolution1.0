@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChunkAroundLoader : MonoBehaviour
 {
-    private const int ChunksAround = 1;
+    private const int ChunksAround = 2;
     private readonly int[] _position = new int[2];
     private int _dif;
     private readonly float[] _playerPos = new float[2];

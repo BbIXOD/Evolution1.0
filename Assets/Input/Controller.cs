@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
 
     private void OnEnable()
     {
+        _controls.Movement.Attack.performed += Attack;
         _controls.System.Menu.performed += ShowMenu;
         _controls.Enable();
 
@@ -27,6 +28,7 @@ public class Controller : MonoBehaviour
 
     private void OnDisable()
     {
+        _controls.Movement.Attack.performed -= Attack;
         _controls.System.Menu.performed -= ShowMenu;
         _controls.Disable();
 
@@ -61,6 +63,15 @@ public class Controller : MonoBehaviour
     {
         var mPos = _controls.Movement.Look.ReadValue<Vector2>();
         _object.Look(mPos);
+    }
+
+    private void Attack(InputAction.CallbackContext context)
+    {
+        if (!_view.IsMine)
+        {
+            return;
+        }
+        _object.Attack();
     }
 
     private void ShowMenu(InputAction.CallbackContext context)
