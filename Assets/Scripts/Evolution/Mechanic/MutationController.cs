@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MutationController : MonoBehaviour
 {
-    private readonly IBodyPart[] _parts = new IBodyPart[Enum.GetValues(typeof(PartsEnum)).Length];
+    public readonly IBodyPart[] parts = new IBodyPart[Enum.GetValues(typeof(PartsEnum)).Length];
     private readonly List<IBodyPart> _partsIterList = new List<IBodyPart>();
     private readonly GameObject[] _installed = new GameObject[Enum.GetValues(typeof(PartsEnum)).Length];
     
@@ -20,9 +20,9 @@ public class MutationController : MonoBehaviour
         _stateGetter = new PlayerStateGetter(go);
         
         MakePartsList();
-        ConnectParts(_parts);
+        ConnectParts(parts);
         
-        InstallPart(_parts[(int)PartsEnum.BasicAttack]);
+        InstallPart(parts[(int)PartsEnum.BasicAttack]);
     }
 
     private void FixedUpdate()
@@ -32,9 +32,9 @@ public class MutationController : MonoBehaviour
 
     private void MakePartsList()
     {
-        _parts[(int)PartsEnum.BasicAttack] = new BasicAttack();
-        _parts[(int)PartsEnum.FunPropeller] = new FunPropeller();
-        
+        parts[(int)PartsEnum.BasicAttack] = new BasicAttack();
+        parts[(int)PartsEnum.FunPropeller] = new FunPropeller();
+        parts[(int)PartsEnum.Horn] = new Horn();
     }
 
     private void ConnectParts(IEnumerable<IBodyPart> parts)
@@ -49,7 +49,7 @@ public class MutationController : MonoBehaviour
 
     private void UpdateNeed()
     {
-        foreach (var part in _parts)
+        foreach (var part in parts)
         {
             part.UpdateValue();
         }
@@ -108,9 +108,9 @@ public class MutationController : MonoBehaviour
     private void AddParts(IEnumerable<PartsEnum> parts)
     {
 
-        foreach (var part in parts.Where(part => _parts[(int)part].Active))
+        foreach (var part in parts.Where(part => this.parts[(int)part].Active))
         {
-            var curPart = _parts[(int)part];
+            var curPart = this.parts[(int)part];
             curPart.Updating = true;
             _partsIterList.Add(curPart);
         }
@@ -120,7 +120,7 @@ public class MutationController : MonoBehaviour
     {
         foreach (var part in parts)
         {
-            var curPart = _parts[(int)part]; 
+            var curPart = this.parts[(int)part]; 
             curPart.Active = false;
             
             if (_partsIterList.Contains(curPart))

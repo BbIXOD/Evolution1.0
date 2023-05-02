@@ -11,6 +11,4 @@ public static class ChunkManager
     public readonly static float MaxHeight = Scale[1] * 1.5f;
 
     public const int FoodCount = 50;
-    
-    //todo: add to and from key conversion (maybe)
 }

@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class AbstractFood : MonoBehaviour
 {
-    private readonly int _evoInc = 10;
-    private readonly int _healthInc = 10;
+    private const int EvoInc = 10;
+    private const int HealthInc = 10;
     private const int MoveTime = 200;
     private const float Speed = 6;
 
     private bool _consumed;
-    private Transform _player;
+    protected Transform player;
 
     private void FixedUpdate()
     {
@@ -17,7 +17,7 @@ public class AbstractFood : MonoBehaviour
         {
             return;
         }
-        var direction = _player.position - transform.position;
+        var direction = player.position - transform.position;
         direction = direction.normalized;
         transform.Translate(Time.fixedDeltaTime * Speed * direction);
     }
@@ -35,15 +35,15 @@ public class AbstractFood : MonoBehaviour
         
         transform.parent.GetComponent<FoodController>().EatenFood();
 
-        _player = col.transform;
+        player = col.transform;
         Consume(state);
     }
 
     private async void Consume(PlayerStateHandler state)
     {
         await Task.Delay(MoveTime);
-        state.playerEvo.EvoPoints += _evoInc;
-        state.playerHealth.Health += _healthInc;
+        state.playerEvo.EvoPoints += EvoInc;
+        state.playerHealth.Health += HealthInc;
         Destroy(gameObject);
     }
 }
