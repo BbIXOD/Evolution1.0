@@ -19,12 +19,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        var health = other.GetComponent<IHealth>();
+        var health = other.gameObject.GetComponent<IHealth>();
         if (health != null)
         {
-            other.GetComponent<IHealth>().Health -= Damage;
+            other.gameObject.GetComponent<IHealth>().Health -= Damage;
         }
         
         Destroy(gameObject);

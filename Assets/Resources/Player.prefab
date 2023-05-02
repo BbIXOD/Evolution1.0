@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 1528896216330432616}
   - component: {fileID: 1528896216330432619}
   - component: {fileID: 1528896216330432618}
-  - component: {fileID: -1835507838322723653}
   - component: {fileID: -8052819621650332781}
   - component: {fileID: 791745693147386676}
   m_Layer: 0
@@ -302,18 +301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodController: {fileID: 6510695891155576095, guid: b83d0c67b2235024bafbc8a6f4d32fc3, type: 3}
   terrainMaterial: {fileID: 2100000, guid: 4d959e7f2b792c547ad0c3010743cffc, type: 2}
---- !u!114 &-1835507838322723653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528896216330432610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b929e1afd6ba14c8c685209b4ace63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8052819621650332781
 MonoBehaviour:
   m_ObjectHideFlags: 0

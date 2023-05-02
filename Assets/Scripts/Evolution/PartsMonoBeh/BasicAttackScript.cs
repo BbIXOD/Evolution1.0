@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class BasicAttack : MonoBehaviour, IAttack
+public class BasicAttackScript : MonoBehaviour, IAttack
 {
     private const string Bullet = "Bullet";
 
@@ -9,9 +9,9 @@ public class BasicAttack : MonoBehaviour, IAttack
 
     public int Cooldown { get; } = 1000;
 
-    private void Awake()
+    private void Start()
     {
-        GetComponent<PlayerMovement>().attackManager.attacks.Add(this);
+        transform.parent.gameObject.GetComponent<PlayerMovement>().attackManager.attacks.Add(this);
     }
 
     public void Attack()

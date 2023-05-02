@@ -21,6 +21,8 @@ public class MutationController : MonoBehaviour
         
         MakePartsList();
         ConnectParts(_parts);
+        
+        InstallPart(_parts[(int)PartsEnum.BasicAttack]);
     }
 
     private void FixedUpdate()
@@ -30,7 +32,9 @@ public class MutationController : MonoBehaviour
 
     private void MakePartsList()
     {
+        _parts[(int)PartsEnum.BasicAttack] = new BasicAttack();
         _parts[(int)PartsEnum.FunPropeller] = new FunPropeller();
+        
     }
 
     private void ConnectParts(IEnumerable<IBodyPart> parts)

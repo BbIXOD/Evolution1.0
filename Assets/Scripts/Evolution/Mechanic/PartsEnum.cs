@@ -2,5 +2,6 @@ using System;
 
 public enum PartsEnum
 {
-    FunPropeller = 0,
+    BasicAttack = 0,
+    FunPropeller = 1,
 }

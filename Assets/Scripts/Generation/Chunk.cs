@@ -9,15 +9,14 @@ public class Chunk
     private GameObject _foodController;
     private readonly Terrain _terrain;
 
-    private readonly TerrainData _terrainData;
     private (int, int) _key;
 
-    private static string _waterLevel = "Water";
+    private const string WaterLevel = "Water";
 
     public static void MakeChunk(int x, int z, GameObject foodController, Material texture)
     {
         var key = (x, z);
-        var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z, texture);
+        var chunk = new Chunk(x * ChunkManager.Resolution.x, z * ChunkManager.Resolution.z, texture);
 
         var position = chunk._field.transform.position;
         
@@ -30,9 +29,9 @@ public class Chunk
         chunk._foodController.transform.parent = chunk._field.transform;
 
         position.y = ChunkManager.MaxHeight;
-        var bound = (GameObject)Resources.Load(_waterLevel);
+        var bound = (GameObject)Resources.Load(WaterLevel);
 
-        var localScale = ChunkManager.Size;
+        var localScale = ChunkManager.Resolution;
         localScale.y = 0.001f;
         bound.transform.localScale = localScale;
         bound.transform.position = position;
@@ -47,11 +46,11 @@ public class Chunk
         _terrain = _field.GetComponent<Terrain>();
         _terrain.materialTemplate = material;
 
-        _terrainData = _terrain.terrainData;
+        var terrainData = _terrain.terrainData;
 
         var pos = _field.transform.position;
         
-        SetChunkHeights.MakeChunk(_terrainData, pos);
+        SetChunkHeights.MakeChunk(terrainData, pos);
     }
 
     public void AddPlayer()
@@ -81,8 +80,8 @@ public class Chunk
     {
         var terData = new TerrainData
         {
-            size = ChunkManager.Size,
-            heightmapResolution = (int)ChunkManager.Size.x,
+            size = ChunkManager.Resolution,
+            heightmapResolution = ChunkManager.Resolution,
         };
 
         var pos = new Vector3(x, 0, z);

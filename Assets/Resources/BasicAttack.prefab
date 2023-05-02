@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6510695891155576095
+--- !u!1 &7011441491931182714
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,55 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4351649015676086277}
-  - component: {fileID: -1088401938567238101}
-  - component: {fileID: -6689446616248848998}
+  - component: {fileID: 5025640929859010052}
+  - component: {fileID: 8362664741892756059}
+  - component: {fileID: -7826313350848832203}
+  - component: {fileID: -7057641371897204164}
   m_Layer: 0
-  m_Name: FoodController
+  m_Name: BasicAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4351649015676086277
+--- !u!4 &5025640929859010052
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6510695891155576095}
+  m_GameObject: {fileID: 7011441491931182714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.3256693, y: 16.512535, z: 89.31558}
+  m_LocalPosition: {x: -10939.181, y: 22918.533, z: 27390.086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1088401938567238101
+--- !u!114 &8362664741892756059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6510695891155576095}
+  m_GameObject: {fileID: 7011441491931182714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed2d4512109644e4882662aa5cc81608, type: 3}
+  m_Script: {fileID: 11500000, guid: 78b929e1afd6ba14c8c685209b4ace63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodInstances:
-  - {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
-  - {fileID: 2949516486274378053, guid: 50794a1e534dd974c81ebea6869d5740, type: 3}
-  - {fileID: 5878192504667563262, guid: 535e5a59fd1ef7d4798f6a3201d78c85, type: 3}
-  foodFrequencies: 0a0000000a00000007000000
---- !u!114 &-6689446616248848998
+--- !u!114 &-7826313350848832203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6510695891155576095}
+  m_GameObject: {fileID: 7011441491931182714}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -67,9 +63,25 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: -7057641371897204164}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-7057641371897204164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011441491931182714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

@@ -10,6 +10,8 @@ public class FoodController : MonoBehaviour
     private const int Delta = 10;
     private const int FoodDelay = 5000;
 
+    private const int HeavyFood = 3;
+
     private bool _generatorRunning;
 
     [SerializeField] private GameObject[] foodInstances;
@@ -61,7 +63,7 @@ public class FoodController : MonoBehaviour
         var position = transform.position;
         var locX = (int)position.x;
         var locZ = (int)position.z;
-        
+
         var key = (locX / (int)ChunkManager.Size.x, locZ / (int)ChunkManager.Size.z);
         
         if (!ChunkManager.Loaded.ContainsKey(key))
@@ -69,25 +71,25 @@ public class FoodController : MonoBehaviour
             return;
         }
         
+        var food = ChooseFood(out var heavy);
+
         var place = Vector3.zero;
         
         place.x = Random.Range(locX, locX + ChunkManager.Size.x);
         place.z = Random.Range(locZ, locZ + ChunkManager.Size.z);
         
         var minY = ChunkManager.Loaded[key].GetChunkHeight(place);
-
-        place.y = Random.Range(minY, ChunkManager.MaxHeight);
+        
+        place.y = heavy ? minY : Random.Range(minY, ChunkManager.MaxHeight);
         
         var rot = Quaternion.Euler(0, 0, 0);
-        
-        var food = ChooseFood();
 
         Instantiate(food, place, rot, transform);
 
         _foodCount++;
     }
 
-    private GameObject ChooseFood()
+    private GameObject ChooseFood(out bool heavy)
     {
         var maxVal = foodFrequencies.Sum();
 
@@ -104,6 +106,7 @@ public class FoodController : MonoBehaviour
         }
         while (currentVal < choose);
 
+        heavy = index == HeavyFood;
         return currentFood;
     }
 

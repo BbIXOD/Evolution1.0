@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IControllable
@@ -13,7 +14,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private const float MinRotY = 90;
     private const float MaxRotY = 270;
-    
+    private readonly float[] _zValues = { 0f, 180f, 360f };
+
     private void Awake()
     {
         var trans = transform;
@@ -34,6 +36,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
         var t = transform;
         var angles = t.eulerAngles;
+        if (angles.z > 1) Debug.Log(angles.z);
+        angles.z = ToNearest(angles.z, _zValues, 10);
+        
         t.eulerAngles = Vector3.Lerp(angles, angles + _targetRotation, PlayerMovementData.RotationTime * Time.fixedDeltaTime);
         _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, PlayerMovementData.RotationTime * Time.fixedDeltaTime);
 
@@ -61,5 +66,15 @@ public class PlayerMovement : MonoBehaviour, IControllable
             return fromFull - Mathf.Epsilon;
         }
         return fromZero - Mathf.Epsilon;
+    }
+
+    private float ToNearest(float value, float[] values, float delta)
+    {
+        foreach (var number in values.Where(number => Mathf.Abs(value - number) < delta))
+        {
+            return number;
+        }
+
+        return 0;
     }
 }
