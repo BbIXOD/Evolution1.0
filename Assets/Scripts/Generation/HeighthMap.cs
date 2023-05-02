@@ -16,15 +16,15 @@ public static class SetChunkHeights
 
     public static void MakeChunk(TerrainData data, Vector3 pos)
     {
-        var size = ChunkManager.Size;
-        var heightMap = new float[(int)size.x + 1, (int)size.z + 1];
+        const int size = ChunkManager.Resolution + 1;
+        var heightMap = new float[size, size];
 
         for (int x = 0; x < heightMap.GetLength(0); x++)
         {
             for (int z = 0; z < heightMap.GetLength(1); z++)
             {
                 heightMap[z, x] =
-                    Mathf.PerlinNoise((x + pos.x) * Scale + DeltaX, (z + pos.z) * Scale + DeltaZ);
+                    Mathf.PerlinNoise((x * ChunkManager.Scale[0] + pos.x) * Scale + DeltaX, (z * ChunkManager.Scale[0] + pos.z) * Scale + DeltaZ);
                 heightMap[z, x] = Mathf.Pow(heightMap[z, x], Power);
             }
         }

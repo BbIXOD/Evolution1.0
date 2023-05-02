@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
         var t = transform;
         var angles = t.eulerAngles;
-        if (angles.z > 1) Debug.Log(angles.z);
         angles.z = ToNearest(angles.z, _zValues, 10);
         
         t.eulerAngles = Vector3.Lerp(angles, angles + _targetRotation, PlayerMovementData.RotationTime * Time.fixedDeltaTime);

@@ -1,4 +1,3 @@
-using Photon.Pun;
 using UnityEngine;
 
 public class Chunk
@@ -16,7 +15,7 @@ public class Chunk
     public static void MakeChunk(int x, int z, GameObject foodController, Material texture)
     {
         var key = (x, z);
-        var chunk = new Chunk(x * ChunkManager.Resolution.x, z * ChunkManager.Resolution.z, texture);
+        var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z, texture);
 
         var position = chunk._field.transform.position;
         
@@ -31,7 +30,7 @@ public class Chunk
         position.y = ChunkManager.MaxHeight;
         var bound = (GameObject)Resources.Load(WaterLevel);
 
-        var localScale = ChunkManager.Resolution;
+        var localScale = ChunkManager.Size;
         localScale.y = 0.001f;
         bound.transform.localScale = localScale;
         bound.transform.position = position;
@@ -80,7 +79,7 @@ public class Chunk
     {
         var terData = new TerrainData
         {
-            size = ChunkManager.Resolution,
+            size = ChunkManager.Size,
             heightmapResolution = ChunkManager.Resolution,
         };
 
