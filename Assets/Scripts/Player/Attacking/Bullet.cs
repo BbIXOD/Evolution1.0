@@ -19,8 +19,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
+        
         var health = other.gameObject.GetComponent<IHealth>();
         if (health != null)
         {
