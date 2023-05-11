@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MenuController
 {
-    private GameObject _menu;
+    private readonly GameObject _menu;
     
     public MenuController()
     {

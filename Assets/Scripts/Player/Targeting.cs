@@ -1,12 +1,11 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class Targeting : MonoBehaviour
 {
     private const int SightIndex = 0;
     private const float MaxDistance = 100f;
-    
-    [SerializeField] private GameObject canvas;
+
     private Image _sightShow;
     private RectTransform _sightTransform;
     
@@ -14,13 +13,12 @@ public class Targeting : MonoBehaviour
     private Camera _camera;
     
 
-    private void Awake()
+    public void Init(Transform canvas)
     {
-        canvas = Instantiate(canvas);
         _myTransform = transform;
         _camera = Camera.main;
-        
-        var sight = canvas.transform.GetChild(SightIndex).gameObject;
+
+        var sight = canvas.GetChild(SightIndex).gameObject;
         _sightTransform = sight.GetComponent<RectTransform>();
         _sightShow = sight.GetComponent<Image>();
     }
@@ -30,6 +28,7 @@ public class Targeting : MonoBehaviour
         const int layerMask = 1;
         var isHit = Physics.Raycast(_myTransform.position, _myTransform.forward, out var hit,
             MaxDistance, layerMask, QueryTriggerInteraction.Ignore);
+        
         _sightShow.enabled = isHit;
 
         _sightTransform.position = _camera.WorldToScreenPoint(hit.point);
