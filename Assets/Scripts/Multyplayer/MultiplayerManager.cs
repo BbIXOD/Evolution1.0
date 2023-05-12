@@ -19,20 +19,21 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         _startPosition.z += Random.Range(-Delta, Delta);
 
         player = PhotonNetwork.Instantiate(player.name, _startPosition, Quaternion.Euler(0, 0, 0));
+        
+        var cam = player.GetComponentInChildren<CinemachineVirtualCamera>();
+        cam.Priority++;
 
         if (!view.IsMine)
         {
             return;
         }
-        
-        var cam = player.GetComponentInChildren<CinemachineVirtualCamera>();
-        cam.Priority++;
 
         var targeting = player.AddComponent<Targeting>();
 
         canvas = Instantiate(canvas);
         targeting.Init(canvas.transform);
 
+        player.AddComponent<PlayerMovement>();
     }
 
     public void LeaveRoom()

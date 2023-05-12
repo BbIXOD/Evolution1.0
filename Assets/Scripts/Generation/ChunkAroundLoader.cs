@@ -66,7 +66,7 @@ public class ChunkAroundLoader : MonoBehaviour
         {
             for (var j = -ChunksAround; j <= ChunksAround; j++)
             {
-                LeaveChunk(i, j);
+                LeaveChunk(_curChunk[0] + i, _curChunk[1] + j);
             }
         }
     }
@@ -81,8 +81,8 @@ public class ChunkAroundLoader : MonoBehaviour
         Chunk.MakeChunk(x, y, foodController, terrainMaterial);
     }
 
-    private void LeaveChunk(int x, int y)
-    { 
+    private static void LeaveChunk(int x, int y)
+    {
         ChunkManager.Loaded[(x, y)].SubtractPlayer();
     }
 }

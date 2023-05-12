@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,7 +6,7 @@ public class AttackManager
 {
     private readonly Transform _player;
     
-    [NonSerialized]public readonly List<IAttack> attacks = new List<IAttack>();
+    public readonly List<IAttack> attacks = new();
 
     public void Attack()
     {

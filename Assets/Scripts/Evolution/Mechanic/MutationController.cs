@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Photon.Pun;
 using UnityEngine;
 
 public class MutationController : MonoBehaviour
 {
-    public readonly IBodyPart[] parts = new IBodyPart[Enum.GetValues(typeof(PartsEnum)).Length];
-    private readonly List<IBodyPart> _partsIterList = new List<IBodyPart>();
+    public readonly IBodyPart[] partsList = new IBodyPart[Enum.GetValues(typeof(PartsEnum)).Length];
+    private readonly List<IBodyPart> _partsIterList = new();
     private readonly GameObject[] _installed = new GameObject[Enum.GetValues(typeof(PartsEnum)).Length];
     
     private Transform _parent;
@@ -20,9 +19,9 @@ public class MutationController : MonoBehaviour
         _stateGetter = new PlayerStateGetter(go);
         
         MakePartsList();
-        ConnectParts(parts);
+        ConnectParts(partsList);
         
-        InstallPart(parts[(int)PartsEnum.BasicAttack]);
+        InstallPart(partsList[(int)PartsEnum.BasicAttack]);
     }
 
     private void FixedUpdate()
@@ -32,9 +31,9 @@ public class MutationController : MonoBehaviour
 
     private void MakePartsList()
     {
-        parts[(int)PartsEnum.BasicAttack] = new BasicAttack();
-        parts[(int)PartsEnum.FunPropeller] = new FunPropeller();
-        parts[(int)PartsEnum.Horn] = new Horn();
+        partsList[(int)PartsEnum.BasicAttack] = new BasicAttack();
+        partsList[(int)PartsEnum.FunPropeller] = new FunPropeller();
+        partsList[(int)PartsEnum.Horn] = new Horn();
     }
 
     private void ConnectParts(IEnumerable<IBodyPart> parts)
@@ -49,7 +48,7 @@ public class MutationController : MonoBehaviour
 
     private void UpdateNeed()
     {
-        foreach (var part in parts)
+        foreach (var part in partsList)
         {
             part.UpdateValue();
         }
@@ -98,19 +97,17 @@ public class MutationController : MonoBehaviour
         part.Updating = false;
         _partsIterList.Remove(part);
         
-        var instance =
-            PhotonNetwork.Instantiate(part.Part, _parent.position, _parent.rotation);
-        instance.transform.SetParent(_parent);
-        
+        var instance = (GameObject)Instantiate(Resources.Load(part.Part), _parent, false);
+
         _installed[(int)part.Index] = instance;
     }
 
     private void AddParts(IEnumerable<PartsEnum> parts)
     {
 
-        foreach (var part in parts.Where(part => this.parts[(int)part].Active))
+        foreach (var part in parts.Where(part => partsList[(int)part].Active))
         {
-            var curPart = this.parts[(int)part];
+            var curPart = partsList[(int)part];
             curPart.Updating = true;
             _partsIterList.Add(curPart);
         }
@@ -120,7 +117,7 @@ public class MutationController : MonoBehaviour
     {
         foreach (var part in parts)
         {
-            var curPart = this.parts[(int)part]; 
+            var curPart = this.partsList[(int)part]; 
             curPart.Active = false;
             
             if (_partsIterList.Contains(curPart))

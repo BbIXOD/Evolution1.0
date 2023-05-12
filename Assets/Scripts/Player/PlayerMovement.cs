@@ -14,19 +14,23 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private const float MinRotY = 90;
     private const float MaxRotY = 270;
-    private readonly float[] _zValues = { 0f, 180f, 360f };
+    private readonly float[] _zValues = { -180f, 0f, 180f, 360f };
 
     private void Awake()
     {
         var trans = transform;
         
         _rigidbody = GetComponent<Rigidbody>();
-        _playerMovementData = new PlayerMovementData();
         attackManager = new AttackManager();
 
         _rigidbody.angularDrag = Mathf.Infinity;
 
         _targetRotation = trans.eulerAngles;
+    }
+
+    private void Start()
+    {
+        _playerMovementData = GetComponent<PlayerStateHandler>().pMData;
     }
 
     public void Look(Vector2 mPos)

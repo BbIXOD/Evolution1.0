@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MenuController
@@ -7,7 +8,14 @@ public class MenuController
     public MenuController()
     {
         _menu = GameObject.FindWithTag("Menu");
-        _menu.SetActive(false);
+        try
+        {
+            _menu.SetActive(false);
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("Wait");
+        }
     }
 
     public void ToggleMenuVisibility()
