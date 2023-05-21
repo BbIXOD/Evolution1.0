@@ -4,13 +4,14 @@ using static MyExtensions.MyExtensions;
 
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField] private Object[] behaviors;
     private IBehaviour[] _behaviors;
     private IBehaviour _current;
 
-    private void Awake()
+    private void Start()
     {
-        _behaviors = (IBehaviour[])behaviors;
+        _behaviors = GetComponents<IBehaviour>();
+
+        _current = _behaviors.FindBest(beh => beh.Condition());
     }
 
     private void FixedUpdate()
