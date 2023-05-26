@@ -25,7 +25,8 @@ public class AbstractFood : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        var state = col.gameObject.GetComponent<PlayerStateHandler>();
+        var state = col.gameObject.GetComponent<IHealth>();
+        
         if (_consumed || state == null)
         {
             return;
@@ -39,11 +40,16 @@ public class AbstractFood : MonoBehaviour
         Consume(state);
     }
 
-    private async void Consume(PlayerStateHandler state)
+    private async void Consume(IHealth state)
     {
         await Task.Delay(MoveTime);
-        state.playerEvo.EvoPoints += EvoInc;
-        state.playerHealth.Health += HealthInc;
+        state.Health += HealthInc;
+
+        var evo = state as PlayerStateHandler;
+        if (evo != null)
+        {
+            evo.playerEvo.EvoPoints += EvoInc;
+        }
         Destroy(gameObject);
     }
 }

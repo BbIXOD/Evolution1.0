@@ -1,8 +1,6 @@
 
 public class EnemyData
 {
-    public EnemyData() {}
-    
-    public float speed = 400f;
-    public float rotTime = 2f;
+    public float speed = 300f;
+    public float rotTime = 3f;
 }

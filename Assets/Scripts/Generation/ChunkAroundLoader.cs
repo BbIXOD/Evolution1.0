@@ -78,7 +78,7 @@ public class ChunkAroundLoader : MonoBehaviour
             ChunkManager.Loaded[(x, y)].AddPlayer();
             return;
         }
-        Chunk.MakeChunk(x, y, foodController, terrainMaterial);
+        Chunk.MakeChunk(x, y, terrainMaterial);
     }
 
     private static void LeaveChunk(int x, int y)

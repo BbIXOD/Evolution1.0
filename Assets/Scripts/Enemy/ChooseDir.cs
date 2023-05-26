@@ -3,6 +3,7 @@ using UnityEngine;
 public static class ChooseDir
 {
     private const float DeltaY = 0.1f;
+    private const float DeltaMagnitude = 0.3f;
 
     public static void SimpleMoveTo(Rigidbody movable, Vector3 target, float speed, float rotTime)
     {
@@ -18,9 +19,15 @@ public static class ChooseDir
 
     public static void SimpleMove(Rigidbody movable, GameObject target, float speed, float rotTime)
     {
+        var pos = movable.position;
+        var dist = (target.transform.position - pos).magnitude;
 
-        var bestRot = target.transform.position - movable.position;
-        bestRot = DirYTo(bestRot, target);
+        if (dist < DeltaMagnitude)
+        {
+            return;
+        }
+        
+        var bestRot = DirYTo(pos, target);
         var qBestRot = Quaternion.LookRotation(bestRot);
 
         movable.rotation = Quaternion.Lerp(movable.rotation, qBestRot, rotTime);

@@ -18,7 +18,7 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Enter()
+    public virtual void Enter()
     {
         Search();
     }
@@ -28,17 +28,17 @@ public abstract class BaseBehaviour : MonoBehaviour, IBehaviour
         if (target == null)
         {
             Search();
+            
+            if (target == null)
+            {
+                return;
+            }
         }
 
-        if (target == null)
-        {
-            return;
-        }
-        
         ChooseDir.SimpleMove(rb, target, data.speed, data.rotTime);
     }
 
-    public void Exit() { }
+    public virtual void Exit() { }
 
     public virtual int Condition()
     {

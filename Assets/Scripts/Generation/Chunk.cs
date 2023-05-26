@@ -11,8 +11,10 @@ public class Chunk
     private (int, int) _key;
 
     private const string WaterLevel = "Water";
+    private const string ChunkGenerationController = "ChunkGenerationController";
+    
 
-    public static void MakeChunk(int x, int z, GameObject foodController, Material texture)
+    public static void MakeChunk(int x, int z, Material texture)
     {
         var key = (x, z);
         var chunk = new Chunk(x * ChunkManager.Size.x, z * ChunkManager.Size.z, texture);
@@ -22,7 +24,7 @@ public class Chunk
         ChunkManager.Loaded.Add(key, chunk);
         chunk._key = key;
         
-        chunk._foodController = Object.Instantiate(foodController,
+        chunk._foodController = Object.Instantiate(Resources.Load<GameObject>(ChunkGenerationController),
             position, Quaternion.Euler(0,0,0));
         chunk._foodController.isStatic = true;
         chunk._foodController.transform.parent = chunk._field.transform;

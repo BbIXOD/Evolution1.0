@@ -15,6 +15,18 @@ public class EscapeBehaviour: BaseBehaviour
         searchedTrigger = QueryTriggerInteraction.Ignore;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        searchRadius *= 2;
+    }
+    
+    public override void Exit()
+    {
+        base.Exit();
+        searchRadius /= 2;
+    }
+    
     public override void DoBeh()
     {
         if (playerContainer == null)
