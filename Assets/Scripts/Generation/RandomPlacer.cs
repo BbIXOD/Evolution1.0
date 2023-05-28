@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class RandomPlacer
 {
-    public static Vector3 GetPlace(Vector3 position, out bool success, float upTo = 0)
+    public static Vector3 GetPlace(Vector3 position, out bool success, bool heavy = false, float upTo = 0)
     {
         var locX = (int)position.x;
         var locZ = (int)position.z;
@@ -21,10 +21,13 @@ public static class RandomPlacer
         place.z = Random.Range(locZ, locZ + ChunkManager.Size.z);
         
         var minY = ChunkManager.Loaded[key].GetChunkHeight(place);
-        place.y = Random.Range(minY, ChunkManager.MaxHeight);
+        
+        
+        place.y = heavy ? minY : Random.Range(minY, ChunkManager.MaxHeight);
         place.y += upTo;
 
         success = true;
+
         return place;
     }
     

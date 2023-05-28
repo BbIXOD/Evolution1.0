@@ -1,9 +1,13 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class Despawn : MonoBehaviour
 {
     private const int Delay = 1000;
+    [NonSerialized]public EnemySpawnController controller;
+
+    [SerializeField] private GameObject loot;
     
     private void Start()
     {
@@ -19,8 +23,15 @@ public class Despawn : MonoBehaviour
         {
             await Task.Delay(Delay);
             Scan();
+            return;
         }
         
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        controller.Destroyed();
+        Instantiate(loot, transform.position, Quaternion.Euler(0, 0, 0));
     }
 }

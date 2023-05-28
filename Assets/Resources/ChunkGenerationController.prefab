@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4351649015676086277}
   - component: {fileID: -1088401938567238101}
+  - component: {fileID: -3392585383918629323}
   - component: {fileID: -6689446616248848998}
   m_Layer: 0
   m_Name: ChunkGenerationController
@@ -45,11 +46,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2d4512109644e4882662aa5cc81608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodInstances:
-  - {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
+  spawnInstances:
   - {fileID: 2949516486274378053, guid: 50794a1e534dd974c81ebea6869d5740, type: 3}
+  - {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
   - {fileID: 5878192504667563262, guid: 535e5a59fd1ef7d4798f6a3201d78c85, type: 3}
-  foodFrequencies: 0a0000000a00000007000000
+  spawnFrequencies: 0a0000000800000005000000
+--- !u!114 &-3392585383918629323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510695891155576095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac7d1068bdc81c469e71e57e23353b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInstances:
+  - {fileID: 7990668858895315717, guid: 5b3d3e38e4efd4f4b81f26fc0e219b01, type: 3}
+  spawnFrequencies: 64000000
 --- !u!114 &-6689446616248848998
 MonoBehaviour:
   m_ObjectHideFlags: 0

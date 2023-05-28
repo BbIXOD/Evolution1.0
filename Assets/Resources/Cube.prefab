@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdaacce4178a1ea43862fae6c99f1879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  loot: {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
 --- !u!114 &7990668858895315716
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class AbstractFood : MonoBehaviour
 
         _consumed = true;
         
-        transform.parent.GetComponent<FoodController>().EatenFood();
+        transform.parent.GetComponent<FoodController>().Destroyed();
 
         player = col.transform;
         Consume(state);
