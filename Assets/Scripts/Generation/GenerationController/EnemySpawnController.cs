@@ -13,8 +13,13 @@ public class EnemySpawnController : BaseController
     protected override GameObject Place()
     {
         var enemy = base.Place();
+
+        if (enemy == null)
+        {
+            return null;
+        }
         
-        enemy.GetComponent<Despawn>().controller = this;
+        enemy.GetComponent<SpawnManager>().controller = this;
         
         return enemy;
     }

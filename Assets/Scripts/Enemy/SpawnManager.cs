@@ -2,26 +2,40 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Despawn : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     private const int Delay = 1000;
     [NonSerialized]public EnemySpawnController controller;
 
     [SerializeField] private GameObject loot;
     
+    private bool _onQuit;
+    private bool _dead;
+    
     private void Start()
     {
+        GetComponent<Rigidbody>().angularDrag = Mathf.Infinity;
         Scan();
     }
 
     private async void Scan()
     {
+        if (!enabled)
+        {
+            return;
+        }
         var ray = new Ray(transform.position, Vector3.down);
         var isHit = Physics.Raycast(ray, ChunkManager.MaxHeight);
 
         if (isHit)
         {
             await Task.Delay(Delay);
+
+            if (_dead)
+            {
+                return;
+            }
+            
             Scan();
             return;
         }
@@ -29,9 +43,26 @@ public class Despawn : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnApplicationQuit()
+    {
+        _onQuit = true;
+    }
+
     private void OnDestroy()
     {
-        controller.Destroyed();
+        if (_onQuit)
+        {
+            return;
+        }
+        
+        _dead = true;
+        
         Instantiate(loot, transform.position, Quaternion.Euler(0, 0, 0));
+
+        if (ReferenceEquals(controller, null))
+        {
+            return;
+        }
+        controller.Destroyed();
     }
 }
