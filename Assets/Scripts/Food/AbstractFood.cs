@@ -16,12 +16,8 @@ public class AbstractFood : MonoBehaviour
     private bool _loot;
     protected Transform player;
 
-    private readonly CancellationTokenSource _tokenSource = new();
-    private CancellationToken _token;
-
     private async void Start()
     {
-        _token = _tokenSource.Token;
 
         _loot = transform.parent == null;
         
@@ -30,11 +26,14 @@ public class AbstractFood : MonoBehaviour
             return;
         }
 
-        try
+        
+        await Task.Delay(LastingTime);
+
+        if (this == null)
         {
-            await Task.Delay(LastingTime, _token);
+            return;
         }
-        catch (OperationCanceledException) { }
+        
         Destroy(gameObject);
     }
 
@@ -80,7 +79,13 @@ public class AbstractFood : MonoBehaviour
 
     private async void Consume(IHealth state)
     {
-        await Task.Delay(MoveTime, _token);
+        await Task.Delay(MoveTime);
+
+        if (this == null)
+        {
+            return;
+        }
+        
         state.Health += HealthInc;
 
         var evo = state as PlayerStateHandler;
@@ -89,11 +94,6 @@ public class AbstractFood : MonoBehaviour
             evo.playerEvo.EvoPoints += EvoInc;
         }
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        _tokenSource.Cancel();
     }
 }
 

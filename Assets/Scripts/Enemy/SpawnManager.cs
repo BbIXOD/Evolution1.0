@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
 
     private async void Scan()
     {
-        if (!enabled)
+        if (_dead)
         {
             return;
         }
@@ -30,12 +30,6 @@ public class SpawnManager : MonoBehaviour
         if (isHit)
         {
             await Task.Delay(Delay);
-
-            if (_dead)
-            {
-                return;
-            }
-            
             Scan();
             return;
         }
@@ -59,10 +53,11 @@ public class SpawnManager : MonoBehaviour
         
         Instantiate(loot, transform.position, Quaternion.Euler(0, 0, 0));
 
-        if (ReferenceEquals(controller, null))
+        if (controller == null)
         {
             return;
         }
+        
         controller.Destroyed();
     }
 }

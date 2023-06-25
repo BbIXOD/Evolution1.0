@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -18,12 +16,8 @@ public abstract class BaseController : MonoBehaviour
     [SerializeField] protected GameObject[] spawnInstances;
     [SerializeField] protected int[] spawnFrequencies;
 
-    private readonly CancellationTokenSource _deathTokenSource = new CancellationTokenSource();
-    private CancellationToken _deathToken;
-
     private void Start()
     {
-        _deathToken = _deathTokenSource.Token;
         _desired = Random.Range(min, max + 1);
         OnCreatePlacing();
     }
@@ -31,7 +25,7 @@ public abstract class BaseController : MonoBehaviour
     public void Destroyed()
     {
         count--;
-        if (_generatorRunning)
+        if (count >= _desired || _generatorRunning)
         {
             return;
         }
@@ -42,11 +36,13 @@ public abstract class BaseController : MonoBehaviour
 
     private async void Generate()
     {
-        try
+        
+        await Task.Delay(spawnRate);
+
+        if (this == null)
         {
-            await Task.Delay(spawnRate, _deathToken);
+            return;
         }
-        catch (OperationCanceledException) { }
         
         Place();
         if (count < _desired)
@@ -103,10 +99,5 @@ public abstract class BaseController : MonoBehaviour
         
         
         return spawnInstances[--index];
-    }
-
-    private void OnDestroy()
-    {
-        _deathTokenSource.Cancel();
     }
 }
