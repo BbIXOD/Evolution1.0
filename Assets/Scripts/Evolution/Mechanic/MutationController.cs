@@ -8,6 +8,8 @@ public class MutationController : MonoBehaviour
     public readonly IBodyPart[] partsList = new IBodyPart[Enum.GetValues(typeof(PartsEnum)).Length];
     private readonly List<IBodyPart> _partsIterList = new();
     private readonly GameObject[] _installed = new GameObject[Enum.GetValues(typeof(PartsEnum)).Length];
+
+    private const string Path = "Parts/";
     
     private Transform _parent;
     private PlayerStateGetter _stateGetter;
@@ -34,6 +36,7 @@ public class MutationController : MonoBehaviour
         partsList[(int)PartsEnum.BasicAttack] = new BasicAttack();
         partsList[(int)PartsEnum.FunPropeller] = new FunPropeller();
         partsList[(int)PartsEnum.Horn] = new Horn();
+        partsList[(int)PartsEnum.BasicRegen] = new BasicRegen();
     }
 
     private void ConnectParts(IEnumerable<IBodyPart> parts)
@@ -97,7 +100,8 @@ public class MutationController : MonoBehaviour
         part.Updating = false;
         _partsIterList.Remove(part);
         
-        var instance = (GameObject)Instantiate(Resources.Load(part.Part), _parent, false);
+        var instance = 
+            (GameObject)Instantiate(Resources.Load(Path + part.Part), _parent, false);
 
         _installed[(int)part.Index] = instance;
     }

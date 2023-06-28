@@ -26,7 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if (nameString == "")
         {
-            nameString = Convert.ToString(Random.Range(0, 10));
+            nameString = "Player";
         }
         PhotonNetwork.NickName = nameString;
         

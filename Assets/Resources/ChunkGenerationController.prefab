@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 2949516486274378053, guid: 50794a1e534dd974c81ebea6869d5740, type: 3}
   - {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
   - {fileID: 5878192504667563262, guid: 535e5a59fd1ef7d4798f6a3201d78c85, type: 3}
-  spawnFrequencies: 0a0000000800000005000000
+  spawnFrequencies: 0a0000000700000005000000
 --- !u!114 &-3392585383918629323
 MonoBehaviour:
   m_ObjectHideFlags: 0

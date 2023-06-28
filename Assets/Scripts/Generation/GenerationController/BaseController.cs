@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -84,20 +83,7 @@ public abstract class BaseController : MonoBehaviour
 
     protected GameObject Choose()
     {
-        var maxVal = spawnFrequencies.Sum();
-
-        var choose = Random.Range(0, maxVal) + 1;
-        var currentVal = 0;
-        var index = 0;
-
-        do
-        {
-            currentVal += spawnFrequencies[index];
-            index++;
-        }
-        while (currentVal < choose);
-        
-        
-        return spawnInstances[--index];
+        var index = MyExtensions.Choose(spawnFrequencies);
+        return spawnInstances[index];
     }
 }

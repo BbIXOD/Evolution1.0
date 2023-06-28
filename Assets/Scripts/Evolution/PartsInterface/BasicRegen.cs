@@ -1,22 +1,21 @@
 using System;
+using UnityEngine;
 
-public sealed class Horn : AbstractBodyPart
+public sealed class BasicRegen : AbstractBodyPart
 {
     private const float Multiplier = 100;
     
-    public Horn()
+    public BasicRegen()
     {
         add = Array.Empty<PartsEnum>();
         remove = Array.Empty<PartsEnum>();
         destroy = Array.Empty<PartsEnum>();
         Part = ToString();
-        Index = PartsEnum.Horn;
+        Index = PartsEnum.BasicRegen;
     }
 
-    public override void UpdateValue() { }
-
-    public void AddPoints()
+    public override void UpdateValue()
     {
-        NeedValue += Multiplier;
+        NeedValue += Getter.HowHurt() * Time.fixedDeltaTime;
     }
 }

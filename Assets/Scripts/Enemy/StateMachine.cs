@@ -1,5 +1,5 @@
 using UnityEngine;
-using static MyExtensions.MyExtensions;
+using static MyExtensions;
 
 
 public class StateMachine : MonoBehaviour

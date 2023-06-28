@@ -7,8 +7,8 @@ public class FoodController : BaseController
     
     private void Awake()
     {
-        min = ChunkManager.FoodCount - Delta;
-        max = ChunkManager.FoodCount - Delta;
+        min = ChunkManager.FoodCount - Delta / 2;
+        max = ChunkManager.FoodCount + Delta / 2;
         spawnRate = 5000;
     }
 

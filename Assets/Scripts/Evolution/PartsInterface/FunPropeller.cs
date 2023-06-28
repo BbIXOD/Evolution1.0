@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -16,6 +15,6 @@ public sealed class FunPropeller : AbstractBodyPart
 
     public override void UpdateValue()
     {
-        NeedValue += Getter.Moving();
+        NeedValue += Getter.Moving() * Time.fixedDeltaTime;
     }
 }

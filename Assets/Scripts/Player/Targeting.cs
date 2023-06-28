@@ -1,10 +1,12 @@
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 public class Targeting : MonoBehaviour
 {
     private const int SightIndex = 0;
-    private const float MaxDistance = 100f;
+
+    private const float MaxDistance = 100f,
+        SightSize = 2,
+        DistanceNerf = 15; // nerf is always good
 
     private Image _sightShow;
     private RectTransform _sightTransform;
@@ -31,6 +33,13 @@ public class Targeting : MonoBehaviour
         
         _sightShow.enabled = isHit;
 
+        if (!isHit)
+        {
+            return;
+        }
+
         _sightTransform.position = _camera.WorldToScreenPoint(hit.point);
+        var size = SightSize / (hit.distance / DistanceNerf + 1);
+        _sightTransform.localScale = new Vector3(size, size , 0);
     }
 }

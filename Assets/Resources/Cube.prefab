@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7990668858895315761}
   - component: {fileID: 7990668858895315762}
   - component: {fileID: 7990668858895315760}
+  - component: {fileID: -5778381529837162670}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -172,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdaacce4178a1ea43862fae6c99f1879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot: {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
 --- !u!114 &7990668858895315716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,3 +222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &-5778381529837162670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990668858895315717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3304c369ebf634a93f2765026108e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot:
+  - {fileID: 2949516486274378053, guid: 00aa9d1f8bbd03a43a42c3d700c39bcd, type: 3}
+  frequency: 64000000
+  amount: 000000000a00000032000000320000000a000000

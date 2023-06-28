@@ -7,8 +7,6 @@ public class SpawnManager : MonoBehaviour
     private const int Delay = 1000;
     [NonSerialized]public EnemySpawnController controller;
 
-    [SerializeField] private GameObject loot;
-    
     private bool _onQuit;
     private bool _dead;
     
@@ -37,21 +35,10 @@ public class SpawnManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnApplicationQuit()
-    {
-        _onQuit = true;
-    }
-
     private void OnDestroy()
     {
-        if (_onQuit)
-        {
-            return;
-        }
-        
+
         _dead = true;
-        
-        Instantiate(loot, transform.position, Quaternion.Euler(0, 0, 0));
 
         if (controller == null)
         {

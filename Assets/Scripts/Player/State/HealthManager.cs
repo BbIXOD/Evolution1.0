@@ -4,21 +4,21 @@ public class HealthManager : IHealth
 {
     private int _health;
     public int Health { get => _health; set => _health = CheckHealth(value); }
-    private readonly int _maxHealth;
+    public readonly int maxHealth;
     
     private readonly GameObject _me;
 
     public HealthManager(GameObject me, int mHealth)
     {
         _me = me;
-        _maxHealth = mHealth;
-        _health = _maxHealth;
+        maxHealth = mHealth;
+        _health = maxHealth;
     }
     private int CheckHealth(int health)
     {
-        if (health > _maxHealth)
+        if (health > maxHealth)
         {
-            return _maxHealth;
+            return maxHealth;
         }
         if (health > 0)
         {
