@@ -1,5 +1,7 @@
+## !!!Closed and unfinishied project!!!
+
 # Evolution1.0
-This game still developing.
+This game will remain unfinished unless someone will ask me (which will not happen).
 
 It uses Photon unity engine for multyplayer, Cinemachine and New input system,
 using which game can be ported to android.
